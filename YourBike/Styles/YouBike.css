@@ -1,0 +1,136 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-size: 16px;
+}
+
+.main-content{
+    margin: auto;
+    max-width: 1280px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.search{
+    height: 50px;
+    position: relative;   /* Set reload position*/
+    padding:13px 0;
+}
+
+.search-input, .search-sarea{
+    margin-right: 30px;
+    width: 160px;
+    height: 25px;
+}
+
+
+.reload{
+    width: 106px;
+    height: 30px;
+    border: solid #808080;
+    color:#3C3C3C;
+    border-radius: 10px;
+    text-align: center;
+    align-items: center;
+    display: inline-flex;   /*Keep img & text vertical align*/
+    cursor: pointer;
+    position: absolute;  /* Set reload position*/
+    right: 0;
+    bottom: 0;
+}
+
+#reload-img{
+    width: 20px;
+    height: 20px;
+    margin: 2px 5px;
+}
+
+.reload:hover{
+    border: solid #239BB0;
+    color:#239BB0;
+} 
+
+
+
+/* table */
+.table{
+    /* position: relative; */
+    height: 510px;
+    overflow: auto;  
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+
+table th{
+    background-color: #239BB0;
+    color:#FFFFFF;
+    font-weight: bold;
+    padding: 8px;
+    border: 1px solid #F2F2F2 ;
+    text-align: center;
+    position: sticky; 
+    top: 0;
+    margin: 0;
+}
+  
+table td {
+    border: 1px solid #F2F2F2 ;
+    text-align: left;
+    padding: 8px;
+}
+
+table tr:nth-child(even) {
+    background-color: #F2F2F2;
+}
+
+
+.location-img{
+    width: 25px;
+    height: 25px;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+
+
+.bottom-bar{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+}
+
+.hide{
+    display: none;
+}
+
+#map{
+    height: 750px;
+
+}
+
+/* tooltip */
+.tooltip-span{
+    border: 1px solid #333;
+    background: #f7f5d1;
+    padding: 1px;
+    color: #333;
+    position: fixed;   /*if absolute, hover will move if I scroll down*/
+
+    display: None;
+}
+/* the selector handling :hover behavior has a lower Specificity than the rule for the default behavior (tr.tooltip-span selector). */
+.data-list tr:hover .tooltip-span{   
+    display: inline-block;
+}
+
+/* v-cloak： 防止頁面載入時出現 vuejs 的變數名。 */
+[v-cloak] {
+    display: none;
+}

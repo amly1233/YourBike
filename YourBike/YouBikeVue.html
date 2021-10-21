@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YouBikeVue2.0</title>
+    <link rel="stylesheet" href="Styles/YouBike.css">
+    <link rel="shortcut icon" href="Images/favicon.png">
+
+</head>
+<body>
+    <div id="app" class="main-content">
+        <section class="search">
+            <span class="search-text">站名/地點查詢:</span>
+            <input class="search-input" id="search-by-name" type="text" v-model="searchKeyWord">
+    
+            <span class="search-text">場站區域:</span>
+            <select class="search-sarea" name="sarea" id="search-by-area" v-model="area">
+                <option value="0"  selected  >不拘</option>
+                <option value="大安區">大安區</option>
+                <option value="大同區">大同區</option>
+                <option value="士林區">士林區</option>
+                <option value="文山區">文山區</option>
+                <option value="中正區">中正區</option>
+                <option value="中山區">中山區</option>
+                <option value="內湖區">內湖區</option>
+                <option value="北投區">北投區</option>
+                <option value="南港區">南港區</option>
+                <option value="信義區">信義區</option>
+                <option value="萬華區">萬華區</option>
+                <option value="臺大專區">臺大專區</option>
+            </select>
+            
+    
+            <input type="checkbox" name="available" id="search-by-available" v-model="isCheckedAvailable" >
+            <span class="search-text" @click="isCheckedAvailable = ! isCheckedAvailable">只顯示有車輛場站</span>    
+
+        
+            <div class="reload" @click="loadData(); currentTime();" >
+                <img id="reload-img" src="Images/reload.svg"> 
+                最新資料
+            </div>
+        </section>
+        <section class="table">
+            <table id="result-table" class="tablesorter">
+                <thead>
+                    <tr>
+                        <th>項次</th>
+                        <th>場站區域</th>
+                        <th>站名</th>
+                        <th>地點</th>
+                        <th>坐標位置</th>
+                        <th>目前車輛數</th>
+                        <th>目前空位數</th>
+                    </tr>
+                </thead>
+                <tbody class="data-list" @mouseover="tooltip">
+                    <tr v-cloak v-for="(row, index) in filterList">
+                        <td>{{index+1}}</td>
+                        <td class="station">{{row.sarea}}</td>
+                        <td>{{row.sna}}</td>
+                        <td>{{row.ar}}
+                            <span class="tooltip-span" v-bind:style="styleTooltip"> 資料時間 :{{row.updateTime}}</span>
+                        </td>
+                        <td>
+                            <img src="Images/location.jpg" class="location-img" @click="goMap(row)">
+                            <span>{{row.lat}},{{row.lng}}</span>
+                        </td>
+                        <td>{{row.sbi}}</td>
+                        <td>{{row.bemp}}</td>
+                    </tr>
+                </tbody>
+    
+            </table>
+        </section>
+        <section class="bottom-bar">
+            <div>
+                <span>資料筆數: </span>
+                <span id="data-no"> {{rowCount}} 筆</span>
+            </div>
+            <div>
+                <span>現在時間:</span>
+                <span id="current-time">{{timeStamp}}</span>
+            </div>
+            <div>
+                <span>資料更新時間: </span>
+                <span id="data-time"> {{updateTime}}</span>
+            </div>
+        </section>
+        <section id="map">
+
+        </section>
+
+
+    </div>
+    <script src="https://unpkg.com/vue@next"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.21.1/axios.min.js"></script>
+    <script
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqBkxHdHjsRpN6lPcTx2jJCUN72pM8pio&libraries=&v=weekly"
+    async
+  ></script>
+    <script src="Scripts/YouBikeVue.js"></script>
+
+</body>
+</html>
